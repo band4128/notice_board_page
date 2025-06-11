@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    color: rgb(60, 60, 247);
+    text-decoration: none;
+    font-weight: bold;
+}
