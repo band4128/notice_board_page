@@ -3,7 +3,16 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../../../Atoms/Button";
 import '../../Main/index.css'
-import { BoardName, BoardText, BoardTitle, Container, DateText, Footer, Header, Session } from "../../Main/styled";
+import {
+    BoardName,
+    BoardText,
+    BoardTitle,
+    Container,
+    DateText,
+    Footer,
+    Header,
+    SubSession
+} from "../../Main/styled";
 
 const SelectPage = () => {
 
@@ -35,7 +44,7 @@ const SelectPage = () => {
                 <h1>자유 게시판</h1>
             </Header>
             {result && (
-                <Session>
+                <SubSession>
                     <BoardTitle>
                         <h1>{result.boardTitle}</h1>
                     </BoardTitle>
@@ -46,7 +55,7 @@ const SelectPage = () => {
                     <BoardText>
                         <p>{result.boardText}</p>
                     </BoardText>
-                </Session>
+                </SubSession>
             )}
 
             <Footer>

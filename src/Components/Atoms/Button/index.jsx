@@ -11,6 +11,7 @@ const Button = ({
                 border: '3px solid black',
                 width: '225px',
                 height: '50px',
+                marginRight: '40px',
                 marginTop: '10px',
                 backgroundColor: 'rgb(106, 188, 255)',
                 fontSize: '20px',

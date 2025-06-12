@@ -3,7 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../../../Atoms/Button";
 import '../../Main/index.css'
-import { Container, Footer, Header, Input, Session, Table, Textarea } from "../../Main/styled";
+import {
+    Container,
+    Footer,
+    Header,
+    Input,
+    Table,
+    Textarea,
+    UpdateSession
+} from "../../Main/styled";
 
 const UpdatePage = () => {
 
@@ -54,7 +62,7 @@ const UpdatePage = () => {
             <Header>
                 <h1>수정하기</h1>
             </Header>
-            <Session>
+            <UpdateSession>
                 {result && (
                     <Table border={1}>
                         <tr>
@@ -107,7 +115,7 @@ const UpdatePage = () => {
                         </tr>
                     </Table>
                 )}
-            </Session>
+            </UpdateSession>
             <Footer>
                 <Button onClick={onSubmit}>수정하기</Button>
                 <Link to={`/select/${boardNo}`}><Button>돌아가기</Button></Link>
