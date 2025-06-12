@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../Atoms/Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
     InsertContainer,
@@ -45,25 +45,19 @@ const InsertPage = () => {
     const [boardName, setBoardName] = useState("");
     const [boardTitle, setBoardTitle] = useState("");
     const [boardText, setBoardText] = useState("");
-    const inputTitleRef = useRef(null);
-    const inputNameRef = useRef(null);
-    const inputTextRef = useRef(null);
 
     const onSubmit = () => {
 
         if (!boardTitle || boardTitle.trim() === "") {
             alert("제목을 입력해주세요.");
-            inputTitleRef.current.focus();
             return;
         }
         if (!boardName || boardName.trim() === "") {
             alert("이름을 입력해주세요.");
-            inputNameRef.current.focus();
             return;
         }
         if (!boardText || boardText.trim() === "") {
             alert("내용을 입력해주세요.");
-            inputTextRef.current.focus();
             return;
         }
 
@@ -72,8 +66,8 @@ const InsertPage = () => {
             navigate("/");
         }).catch(err => {
             console.log('데이터를 추가하지 못하였습니다. (이유 : ' + err + ')');
+            alert("데이터 추가 싫패");
             navigate("/insert");
-            alert("데이터 추가 싫패")
         });
     }
 
@@ -102,7 +96,6 @@ const InsertPage = () => {
                                 type="text"
                                 onChange={(e) => setBoardTitle(e.target.value)}
                                 placeholder="제목"
-                                ref={inputTitleRef}
                             />
                         </td>
                     </tr>
@@ -113,7 +106,6 @@ const InsertPage = () => {
                                 type="text"
                                 onChange={(e) => setBoardName(e.target.value)}
                                 placeholder="작성자"
-                                ref={inputNameRef}
                             />
                         </td>
                     </tr>
@@ -123,7 +115,6 @@ const InsertPage = () => {
                             <InsertTextarea
                                 onChange={(e) => setBoardText(e.target.value)}
                                 placeholder="내용"
-                                ref={inputTextRef}
                             ></InsertTextarea>
                         </td>
                     </tr>
