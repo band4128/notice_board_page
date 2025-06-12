@@ -29,7 +29,6 @@ const UpdatePage = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:5555/board/boardBy?boardNo=${boardNo}`).then(res => {
-            console.log(res.data);
             setResult(res.data);
             setBoardName(res.data.boardName);
             setBoardTitle(res.data.boardTitle);
@@ -39,20 +38,14 @@ const UpdatePage = () => {
 
     // 수정하기
     const onSubmit = () => {
-        axios.get(`http://localhost:5555/board/update`, {
-            params: {
-                boardNo: boardNo,
-                boardText,
-                boardTitle,
-                createDate: formattedDate
-            }
-        }).then(res => {
-            alert("수정이 완료되었습니다.")
-            navigate("/");
-        }).catch(err => {
-            console.log('데이터를 수정하지지 못하였습니다. (이유 : ' + err + ')');
-            navigate("/");
-        });
+        axios.get(`http://localhost:5555/board/update?boardNo=${boardNo}&boardText=${boardText}&boardTitle=${boardTitle}&createDate=${formattedDate}`)
+            .then(res => {
+                alert("수정이 완료되었습니다.")
+                navigate("/");
+            }).catch(err => {
+                console.log('데이터를 수정하지지 못하였습니다. (이유 : ' + err + ')');
+                navigate("/");
+            });
     }
 
 
@@ -95,7 +88,7 @@ const UpdatePage = () => {
                             <th>내용</th>
                             <td>
                                 <Textarea
-                                value={boardText}
+                                    value={boardText}
                                     onChange={(e) => setBoardText(e.target.value)}
                                 ></Textarea>
                             </td>

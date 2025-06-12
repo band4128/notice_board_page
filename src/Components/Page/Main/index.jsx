@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {Container, Footer, Header, Session, Table } from "./styled";
+import { Container, Footer, Header, MainDateTh, MainNameTh, MainNoTh, MainTd, MainTitleTh, Session, Table } from "./styled";
 import "./index.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -11,8 +11,7 @@ const MainPage = () => {
 
     useEffect(() => {
         axios.get('http://localhost:5555/board/boardAll').then(res => {
-            console.log(res.data);
-            setResult(res.data)
+            setResult(res.data);
         }).catch(err => console.log('데이터가 없습니다. (이유 : ' + err + ')'));
     }, []);
     return (
@@ -23,16 +22,16 @@ const MainPage = () => {
             <Session>
                 <Table border={1}>
                     <tr>
-                        <th style={{ width: '100px' }}>번호</th>
-                        <th style={{ width: '140px' }}>작성자</th>
-                        <th style={{ width: '250px' }}>제목</th>
-                        <th style={{ width: '150px' }}>작성일</th>
+                        <MainNoTh>번호</MainNoTh>
+                        <MainNameTh>작성자</MainNameTh>
+                        <MainTitleTh>제목</MainTitleTh>
+                        <MainDateTh>작성일</MainDateTh>
                     </tr>
                     {result && result.map((res, index) => (
                         <tr key={res.boardNo || index}>
                             <td>{res.boardNo}</td>
                             <td>{res.boardName}</td>
-                            <td style={{ textAlign: 'left', paddingLeft: '10px' }}><Link to={`/select/${res.boardNo }`}>{res.boardTitle}</Link></td>
+                            <MainTd><Link to={`/select/${res.boardNo}`}>{res.boardTitle}</Link></MainTd>
                             <td>{res.createDate.slice(0, 10)}</td>
                         </tr>
                     ))}

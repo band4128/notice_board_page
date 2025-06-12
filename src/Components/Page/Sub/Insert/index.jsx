@@ -25,10 +25,9 @@ const InsertPage = () => {
     // DB에서 번호가 가장 큰 값에 1 더한 수 출력
     useEffect(() => {
         axios.get('http://localhost:5555/board/boardAll').then(res => {
-            console.log(res.data)
             const boards = res.data;
-            const maxNo = boards.reduce((max, item) => Math.max(max, Number(item.boardNo)), 0);
-            setNextBoardNo(maxNo + 1);
+            const maxNo = boards.reduce((max, item) => Math.max(max, Number(item.boardNo) + 1), 0);
+            setNextBoardNo(maxNo);
         }).catch(err => {
             console.log("번호를 불러올 수 없습니다. (이유 : " + err + " )")
             setNextBoardNo(1);
@@ -36,7 +35,6 @@ const InsertPage = () => {
     }, [])
 
     // 입력한 데이터 추가하기
-    const [boardNo, setBoardNo] = useState(1);
     const [boardName, setBoardName] = useState();
     const [boardTitle, setBoardTitle] = useState();
     const [boardText, setBoardText] = useState();
@@ -56,15 +54,7 @@ const InsertPage = () => {
             return;
         }
 
-        axios.get(`http://localhost:5555/board/insert`, {
-            params: {
-                boardNo,
-                boardName,
-                boardTitle,
-                boardText,
-                createDate: formattedDate
-            }
-        }).then(res => {
+        axios.get(`http://localhost:5555/board/insert?boardNo=${nextBoardNo}&boardName=${boardName}&boardText=${boardText}&boardTitle=${boardTitle}&createDate=${formattedDate}`).then(res => {
             alert("등록이 완료되었습니다.")
             navigate("/");
         }).catch(err => {

@@ -12,7 +12,6 @@ const SelectPage = () => {
 
     useEffect(() => {
         axios.get(`http://localhost:5555/board/boardBy?boardNo=${boardNo}`).then(res => {
-            console.log(res.data);
             setResult(res.data)
         }).catch(err => console.log('데이터를 조회할 수 없습니다다. (이유 : ' + err + ')'));
     }, []);

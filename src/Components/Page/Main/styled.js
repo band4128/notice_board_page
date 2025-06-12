@@ -72,3 +72,21 @@ width: 200px;
 height: 200px;
 resize: none;
 `;
+
+export const MainTd = styled.td`
+text-align: left;
+padding-left: 10px; 
+`;
+
+export const MainNoTh = styled.th`
+width: 100px;
+`;
+export const MainNameTh = styled.th`
+width: 140px;
+`;
+export const MainTitleTh = styled.th`
+width: 250px;
+`;
+export const MainDateTh = styled.th`
+width: 150px;
+`;
