@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 width: 100%;
 height: 100%;
-alignItems: center;
+align-items: center;
 `;
 
 export const Header = styled.div`
@@ -16,17 +16,16 @@ line-height: 100px;
 
 export const Table = styled.table`
 width: 95%;
-height: 100%;
 margin: 20px auto;
 text-align: center;
 border-collapse: collapse;
 `;
 
 export const Session = styled.div`
-width: 100hv;
+width: 100%;
 height: 100%;
-margin: 10px auto;
 text-align: end;
+padding-bottom: 70px;
 `;
 
 export const SubSession = styled.div`
@@ -104,35 +103,47 @@ padding: 3px;
 `;
 
 export const MainNoTh = styled.th`
-width: 15%;
+width: 10%;
 height: 40px;
 border-bottom: 1px solid black;
+border-top: 1px solid black;
 font-size: 25px;
 padding: 3px;
+background-color : #e9f7ef;
+color: black;
 `;
 
 export const MainNameTh = styled.th`
 width: 15%;
 height: 40px;
 border-bottom: 1px solid black;
+border-top: 1px solid black;
 font-size: 25px;
 padding: 3px;
+background-color : #e9f7ef;
+color: black;
 `;
 
 export const MainTitleTh = styled.th`
-width: 55%;
+width: 60%;
 height: 40px;
 border-bottom: 1px solid black;
+border-top: 1px solid black;
 font-size: 25px;
 padding: 3px;
+background-color : #e9f7ef;
+color: black;
 `;
 
 export const MainDateTh = styled.th`
 width: 15%;
 height: 40px;
 border-bottom: 1px solid black;
+border-top: 1px solid black;
 font-size: 25px;
 padding: 3px;
+background-color : #e9f7ef;
+color: black;
 `;
 
 export const SubNo = styled.td`
@@ -140,6 +151,7 @@ height : 30px;
 font-size: 19px;
 border-bottom: 1px solid black;
 padding: 3px;
+background-color: #f4f9f7;
 `;
 
 export const SubName = styled.td`
@@ -147,6 +159,7 @@ height : 30px;
 font-size: 19px;
 border-bottom: 1px solid black;
 padding: 3px;
+background-color: #f4f9f7;
 `;
 
 export const SubTitle = styled.td`
@@ -154,6 +167,7 @@ height : 30px;
 font-size: 19px;
 text-align: left;
 padding: 3px;
+background-color: #f4f9f7;
 border-bottom: 1px solid black;
 `;
 
@@ -162,4 +176,5 @@ height : 30px;
 font-size: 19px;
 border-bottom: 1px solid black;
 padding: 3px;
+background-color: #f4f9f7;
 `;

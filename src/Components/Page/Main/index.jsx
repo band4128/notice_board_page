@@ -31,14 +31,10 @@ const MainPage = () => {
     return (
         <Container>
             <Header>
-                <h1>자유 게시판</h1>
+                <h1>네입버 게시판</h1>
             </Header>
             <Session>
-                <Link to='/insert'>
-                    <Button>
-                        등록하러 가기
-                    </Button>
-                </Link>
+                
                 <Table>
                     <tr>
                         <MainNoTh>번호</MainNoTh>
@@ -56,6 +52,13 @@ const MainPage = () => {
                     ))}
                 </Table>
             </Session>
+            <Footer>
+                <Link to='/insert'>
+                    <Button>
+                        등록하러 가기
+                    </Button>
+                </Link>
+            </Footer>
         </Container>
     )
 }
