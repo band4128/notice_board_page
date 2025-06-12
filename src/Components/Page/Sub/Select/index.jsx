@@ -2,17 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../../../Atoms/Button";
-import '../../Main/index.css'
 import {
-    BoardName,
-    BoardText,
-    BoardTitle,
-    Container,
-    DateText,
-    Footer,
-    Header,
-    SubSession
-} from "../../Main/styled";
+    SelectBoardName,
+    SelectBoardText,
+    SelectBoardTitle,
+    SelectContainer,
+    SelectDateText,
+    SelectFooter,
+    SelectHeader,
+    SelectTable
+} from "./styled";
 
 const SelectPage = () => {
 
@@ -39,26 +38,26 @@ const SelectPage = () => {
 
 
     return (
-        <Container>
-            <Header>
+        <SelectContainer>
+            <SelectHeader>
                 <h1>자유 게시판</h1>
-            </Header>
+            </SelectHeader>
             {result && (
-                <SubSession>
-                    <BoardTitle>
+                <SelectTable>
+                    <SelectBoardTitle>
                         <h1>{result.boardTitle}</h1>
-                    </BoardTitle>
-                    <BoardName>
+                    </SelectBoardTitle>
+                    <SelectBoardName>
                         <h4>{result.boardName}</h4>
-                        <DateText>{result.createDate}</DateText>
-                    </BoardName>
-                    <BoardText>
+                        <SelectDateText>{result.createDate}</SelectDateText>
+                    </SelectBoardName>
+                    <SelectBoardText>
                         <p>{result.boardText}</p>
-                    </BoardText>
-                </SubSession>
+                    </SelectBoardText>
+                </SelectTable>
             )}
 
-            <Footer>
+            <SelectFooter>
                 <Link to={`/update/${boardNo}`}>
                     <Button>
                         수정하기
@@ -72,8 +71,8 @@ const SelectPage = () => {
                         홈으로
                     </Button>
                 </Link>
-            </Footer>
-        </Container>
+            </SelectFooter>
+        </SelectContainer>
     )
 }
 

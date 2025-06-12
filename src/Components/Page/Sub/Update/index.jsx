@@ -2,34 +2,25 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../../../Atoms/Button";
-import '../../Main/index.css'
-import {
-    Container,
-    Footer,
-    Header,
-    Input,
-    Table,
-    Textarea,
-    UpdateSession
-} from "../../Main/styled";
+import { UpdateBoardNameTh, UpdateBoardTitleTh, UpdateContainer, UpdateCreateDateTh, UpdateFooter, UpdateHeader, UpdateInput, UpdateSession, UpdateTable, UpdateTextarea } from "./styled";
 
 const UpdatePage = () => {
 
     const navigate = useNavigate();
-    const [boardName, setBoardName] = useState();
-    const [boardTitle, setBoardTitle] = useState();
-    const [boardText, setBoardText] = useState();
+    const [boardName, setBoardName] = useState("");
+    const [boardTitle, setBoardTitle] = useState("");
+    const [boardText, setBoardText] = useState("");
 
     // 현재 날짜 구하기
     const today = new Date();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
+    const todayMonth = today.getMonth() + 1;
+    const todayDay = today.getDate();
 
-    const todayMonth = month < 10 ? `0${month}` : month;
-    const todayday = day < 10 ? `0${day}` : day;
+    const month = todayMonth < 10 ? `0${todayMonth}` : todayMonth;
+    const day = todayDay < 10 ? `0${todayDay}` : todayDay;
 
-    const formattedDate = `${today.getFullYear()}-${todayMonth}-${todayday}`;
-    const [date] = useState(formattedDate);
+    const currentDate = `${today.getFullYear()}-${month}-${day}`;
+    const [date] = useState(currentDate);
 
     // 해당하는 번호의 이름, 제목, 내용을 가져오기
     const { boardNo } = useParams();
@@ -46,7 +37,7 @@ const UpdatePage = () => {
 
     // 수정하기
     const onSubmit = () => {
-        axios.get(`http://localhost:5555/board/update?boardNo=${boardNo}&boardText=${boardText}&boardTitle=${boardTitle}&createDate=${formattedDate}`)
+        axios.get(`http://localhost:5555/board/update?boardNo=${boardNo}&boardText=${boardText}&boardTitle=${boardTitle}&createDate=${currentDate}`)
             .then(res => {
                 alert("수정이 완료되었습니다.")
                 navigate("/");
@@ -58,20 +49,17 @@ const UpdatePage = () => {
 
 
     return (
-        <Container>
-            <Header>
+        <UpdateContainer>
+            <UpdateHeader>
                 <h1>수정하기</h1>
-            </Header>
+            </UpdateHeader>
             <UpdateSession>
                 {result && (
-                    <Table border={1}>
+                    <UpdateTable border={1}>
                         <tr>
-                            <th style={{
-                                width: '100px',
-                                height: '50px',
-                            }}>작성자</th>
+                            <UpdateBoardNameTh>작성자</UpdateBoardNameTh>
                             <td>
-                                <Input
+                                <UpdateInput
                                     type="text"
                                     readOnly
                                     value={boardName}
@@ -79,13 +67,9 @@ const UpdatePage = () => {
                             </td>
                         </tr>
                         <tr>
-                            <th
-                                style={{
-                                    height: '70px'
-                                }}
-                            >제목</th>
+                            <UpdateBoardTitleTh>제목</UpdateBoardTitleTh>
                             <td>
-                                <Input
+                                <UpdateInput
                                     type="text"
                                     value={boardTitle}
                                     onChange={(e) => setBoardTitle(e.target.value)}
@@ -95,32 +79,30 @@ const UpdatePage = () => {
                         <tr>
                             <th>내용</th>
                             <td>
-                                <Textarea
+                                <UpdateTextarea
                                     value={boardText}
                                     onChange={(e) => setBoardText(e.target.value)}
-                                ></Textarea>
+                                ></UpdateTextarea>
                             </td>
                         </tr>
                         <tr>
-                            <th
-                                style={{ height: '50px' }}
-                            >작성일</th>
+                            <UpdateCreateDateTh>작성일</UpdateCreateDateTh>
                             <td>
-                                <Input
+                                <UpdateInput
                                     type="date"
                                     value={date}
                                     readOnly
                                 />
                             </td>
                         </tr>
-                    </Table>
+                    </UpdateTable>
                 )}
             </UpdateSession>
-            <Footer>
+            <UpdateFooter>
                 <Button onClick={onSubmit}>수정하기</Button>
                 <Link to={`/select/${boardNo}`}><Button>돌아가기</Button></Link>
-            </Footer>
-        </Container>
+            </UpdateFooter>
+        </UpdateContainer>
     )
 }
 
