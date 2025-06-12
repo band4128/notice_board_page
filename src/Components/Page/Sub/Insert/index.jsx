@@ -53,17 +53,17 @@ const InsertPage = () => {
 
         if (!boardTitle || boardTitle.trim() === "") {
             alert("제목을 입력해주세요.");
-            inputTitleRef.current?.focus();
+            inputTitleRef.current.focus();
             return;
         }
         if (!boardName || boardName.trim() === "") {
             alert("이름을 입력해주세요.");
-            inputNameRef.current?.focus();
+            inputNameRef.current.focus();
             return;
         }
         if (!boardText || boardText.trim() === "") {
             alert("내용을 입력해주세요.");
-            inputTextRef.current?.focus();
+            inputTextRef.current.focus();
             return;
         }
 
