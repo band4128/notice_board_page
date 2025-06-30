@@ -2,7 +2,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../../../Atoms/Button";
-import { UpdateBoardNameTh, UpdateBoardTitleTh, UpdateContainer, UpdateCreateDateTh, UpdateFooter, UpdateHeader, UpdateInput, UpdateSession, UpdateTable, UpdateTextarea } from "./styled";
+import {
+    UpdateBoardNameTh,
+    UpdateBoardTitleTh,
+    UpdateCreateDateTh,
+    UpdateInput,
+    UpdateSession,
+    UpdateTable,
+    UpdateTextarea
+} from "./styled";
+import { Container, Footer, Header } from "../../Main/styled";
 
 const UpdatePage = () => {
 
@@ -10,6 +19,7 @@ const UpdatePage = () => {
     const [boardName, setBoardName] = useState("");
     const [boardTitle, setBoardTitle] = useState("");
     const [boardText, setBoardText] = useState("");
+    const [createDate, setCreateDate] = useState();
 
     // 현재 날짜 구하기
     const today = new Date();
@@ -32,27 +42,35 @@ const UpdatePage = () => {
             setBoardName(res.data.boardName);
             setBoardTitle(res.data.boardTitle);
             setBoardText(res.data.boardText);
-        }).catch(err => console.log('데이터를 가져올 수 없습니다. (이유 : ' + err + ')'));
+            setCreateDate(res.data.createDate);
+        }).catch(err => console.log('데이터를 가져올 수 없습니다.'));
     }, []);
 
     // 수정하기
     const onSubmit = () => {
-        axios.get(`http://localhost:5555/board/update?boardNo=${boardNo}&boardText=${boardText}&boardTitle=${boardTitle}&createDate=${currentDate}`)
+        axios.put(`http://localhost:5555/board/update`, {
+            boardNo: boardNo,
+            boardName: boardName,
+            boardText: boardText,
+            boardTitle: boardTitle,
+            createDate: createDate,
+            updateDate: date
+        })
             .then(res => {
-                alert("수정이 완료되었습니다.")
+                alert("수정이 완료되었습니다.");
                 navigate("/");
             }).catch(err => {
-                console.log('데이터를 수정하지지 못하였습니다. (이유 : ' + err + ')');
-                navigate("/");
+                alert("데이터 수정에 싫패하였습니다.");
+                navigate(`/select/${boardNo}`);
             });
     }
 
 
     return (
-        <UpdateContainer>
-            <UpdateHeader>
+        <Container>
+            <Header>
                 <h1>수정하기</h1>
-            </UpdateHeader>
+            </Header>
             <UpdateSession>
                 {result && (
                     <UpdateTable border={1}>
@@ -85,24 +103,14 @@ const UpdatePage = () => {
                                 ></UpdateTextarea>
                             </td>
                         </tr>
-                        <tr>
-                            <UpdateCreateDateTh>작성일</UpdateCreateDateTh>
-                            <td>
-                                <UpdateInput
-                                    type="date"
-                                    value={date}
-                                    readOnly
-                                />
-                            </td>
-                        </tr>
                     </UpdateTable>
                 )}
             </UpdateSession>
-            <UpdateFooter>
+            <Footer>
                 <Button onClick={onSubmit}>수정하기</Button>
                 <Link to={`/select/${boardNo}`}><Button>돌아가기</Button></Link>
-            </UpdateFooter>
-        </UpdateContainer>
+            </Footer>
+        </Container>
     )
 }
 

@@ -3,15 +3,13 @@ import Button from "../../../Atoms/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
-    InsertContainer,
-    InsertFooter,
-    InsertHeader,
     InsertInput,
     InsertSession,
     InsertTable,
     InsertTextarea,
     InsertTh
 } from "./styled";
+import { Container, Footer, Header } from "../../Main/styled";
 
 const InsertPage = () => {
 
@@ -28,18 +26,6 @@ const InsertPage = () => {
 
     const currentDate = `${today.getFullYear()}-${month}-${day}`;
     const [date] = useState(currentDate);
-
-    // DB에서 번호가 가장 큰 값에 1 더한 수 출력
-    useEffect(() => {
-        axios.get('http://localhost:5555/board/boardAll').then(res => {
-            const boards = res.data;
-            const maxNo = boards.reduce((max, item) => Math.max(max, Number(item.boardNo)), 1);
-            setNextBoardNo(maxNo + 1);
-        }).catch(err => {
-            console.log("번호를 불러올 수 없습니다. (이유 : " + err + " )")
-            setNextBoardNo(1);
-        })
-    }, [])
 
     // 입력한 데이터 추가하기
     const [boardName, setBoardName] = useState("");
@@ -61,34 +47,27 @@ const InsertPage = () => {
             return;
         }
 
-        axios.get(`http://localhost:5555/board/insert?boardNo=${nextBoardNo}&boardName=${boardName}&boardText=${boardText}&boardTitle=${boardTitle}&createDate=${currentDate}`).then(res => {
+        axios.post(`http://localhost:5555/board/insert`, {
+            boardName: boardName,
+            boardText: boardText,
+            boardTitle: boardTitle,
+            createDate: currentDate
+        }).then(res => {
             alert("등록이 완료되었습니다.")
             navigate("/");
         }).catch(err => {
-            console.log('데이터를 추가하지 못하였습니다. (이유 : ' + err + ')');
-            alert("데이터 추가 싫패");
+            alert("데이터 추가를 실패하였습니다.");
             navigate("/insert");
         });
     }
 
     return (
-        <InsertContainer>
-            <InsertHeader>
+        <Container>
+            <Header>
                 <h1>등록하기</h1>
-            </InsertHeader>
+            </Header>
             <InsertSession>
                 <InsertTable border={1}>
-                    <tr>
-                        <InsertTh>번호</InsertTh>
-                        <td style={{ width: '250px' }}>
-                            <InsertInput
-                                type="text"
-                                value={nextBoardNo}
-                                onChange={(e) => setBoardNo(e.target.value)}
-                                readOnly
-                            />
-                        </td>
-                    </tr>
                     <tr>
                         <InsertTh>제목</InsertTh>
                         <td>
@@ -130,11 +109,11 @@ const InsertPage = () => {
                     </tr>
                 </InsertTable>
             </InsertSession>
-            <InsertFooter>
+            <Footer>
                 <Button onClick={onSubmit}>등록</Button>
                 <Link to='/'><Button>돌아가기</Button></Link>
-            </InsertFooter>
-        </InsertContainer>
+            </Footer>
+        </Container>
     )
 }
 

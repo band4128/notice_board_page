@@ -1,19 +1,5 @@
 import styled from "styled-components";
 
-export const InsertContainer = styled.div`
-width: 100%;
-height: 100%;
-align-items: center;
-`;
-
-export const InsertHeader = styled.div`
-width: 100%;
-height: 100px;
-background-color: rgb(214, 230, 245);
-text-align: center;
-line-height: 100px;
-`;
-
 export const InsertTable = styled.table`
 width: 400px;
 margin: 20px auto;
@@ -26,15 +12,6 @@ width: 100%;
 height: 100%;
 text-align: end;
 padding-bottom: 70px;
-`;
-
-export const InsertFooter = styled.div`
-width: 100%;
-height: 70px;
-background-color: rgb(214, 230, 245);
-position: fixed;
-bottom: 0;
-text-align: center;
 `;
 
 export const InsertInput = styled.input`

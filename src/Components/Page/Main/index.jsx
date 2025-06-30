@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import {
+    Container,
+    Footer,
+    Header,
     MainBodyCreateDate,
     MainBodyName,
     MainBodyNo,
     MainBodyTitle,
-    MainContainer,
     MainDateTh,
-    MainFooter,
-    MainHeader,
     MainNameTh,
     MainNoTh,
     MainSession,
@@ -25,43 +25,41 @@ const MainPage = () => {
     useEffect(() => {
         axios.get('http://localhost:5555/board/boardAll').then(res => {
             setResult(res.data);
-        }).catch(err => console.log('데이터가 없습니다. (이유 : ' + err + ')'));
+        }).catch(err => alert('데이터를 찾을 수 없습니다.'));
     }, []);
     return (
-        <MainContainer>
-            <MainHeader>
+        <Container>
+            <Header>
                 <h1>네입버 게시판</h1>
-            </MainHeader>
+            </Header>
             <MainSession>
                 <MainTable>
-                    <thead>
-                        <tr>
-                            <MainNoTh>번호</MainNoTh>
-                            <MainTitleTh>제목</MainTitleTh>
-                            <MainNameTh>작성자</MainNameTh>
-                            <MainDateTh>작성일</MainDateTh>
-                        </tr>
-                    </thead>
+                    <tr>
+                        <MainNoTh>번호</MainNoTh>
+                        <MainTitleTh>제목</MainTitleTh>
+                        <MainNameTh>작성자</MainNameTh>
+                        <MainDateTh>작성일</MainDateTh>
+                        <MainDateTh>수정된 날</MainDateTh>
+                    </tr>
                     {result.map((res, index) => (
-                        <tbody key={res.boardNo || index}>
-                            <tr>
-                                <MainBodyNo>{res.boardNo}</MainBodyNo>
-                                <MainBodyTitle><Link to={`/select/${res.boardNo}`}>{res.boardTitle}</Link></MainBodyTitle>
-                                <MainBodyName>{res.boardName}</MainBodyName>
-                                <MainBodyCreateDate>{res.createDate}</MainBodyCreateDate>
-                            </tr>
-                        </tbody>
+                        <tr key={res.boardNo || index}>
+                            <MainBodyNo>{res.boardNo}</MainBodyNo>
+                            <MainBodyTitle><Link to={`/select/${res.boardNo}`}>{res.boardTitle}</Link></MainBodyTitle>
+                            <MainBodyName>{res.boardName}</MainBodyName>
+                            <MainBodyCreateDate>{res.createDate}</MainBodyCreateDate>
+                            <MainBodyCreateDate>{res.updateDate}</MainBodyCreateDate>
+                        </tr>
                     ))}
                 </MainTable>
             </MainSession>
-            <MainFooter>
+            <Footer>
                 <Link to='/insert'>
                     <Button>
                         등록하러 가기
                     </Button>
                 </Link>
-            </MainFooter>
-        </MainContainer>
+            </Footer>
+        </Container>
     )
 }
 

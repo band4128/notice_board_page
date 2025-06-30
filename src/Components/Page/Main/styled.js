@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
+export const Container = styled.div`
 width: 100%;
 height: 100%;
 align-items: center;
 `;
 
-export const MainHeader = styled.div`
+export const Header = styled.div`
 width: 100%;
 height: 100px;
 background-color: rgb(214, 230, 245);
@@ -15,7 +15,7 @@ line-height: 100px;
 `;
 
 export const MainTable = styled.table`
-width: 900px;
+width: 1300px;
 margin: 50px auto;
 text-align: center;
 border-collapse: collapse;
@@ -56,7 +56,7 @@ height: 100%;
 padding-top: 10px;
 `;
 
-export const MainFooter = styled.div`
+export const Footer = styled.div`
 width: 100%;
 height: 70px;
 background-color: rgb(214, 230, 245);
@@ -109,7 +109,7 @@ color: black;
 `;
 
 export const MainTitleTh = styled.th`
-width: 60%;
+width: 40%;
 height: 40px;
 border-bottom: 1px solid black;
 border-top: 1px solid black;
@@ -158,7 +158,7 @@ border-bottom: 1px solid black;
 
 export const MainBodyCreateDate = styled.td`
 height : 30px;
-font-size: 15 px;
+font-size: 15px;
 border-bottom: 1px solid black;
 padding: 3px;
 background-color: #f4f9f7;
